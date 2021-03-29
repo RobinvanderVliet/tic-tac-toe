@@ -3,7 +3,7 @@
  * @param board The game board.
  * @returns {string|null} The winner or a null, if there is no winner.
  */
-export function calculateWin(board) {
+export function checkWin(board) {
 	//First make a list of all possible winning combinations.
 	const wins = [
 		[0, 1, 2],
@@ -36,13 +36,13 @@ export function calculateWin(board) {
 }
 
 /**
- * Check whether the game board reached a tie.
+ * Check whether there is a move left on the game board.
  * @param board The game board.
- * @returns {boolean} Whether it is a tie.
+ * @returns {boolean} Whether there is a move left.
  */
-export function calculateTie(board) {
-	//If there is no null in the board anymore, then it is a tie.
-	return !board.includes(null);
+export function checkMoveLeft(board) {
+	//If there is a null on the game board, then there is a move left.
+	return board.includes(null);
 }
 
 /**
@@ -54,13 +54,13 @@ export function calculateTie(board) {
  * @returns {number} The recursively calculated score given to this game board.
  */
 function minimax(board, depth, isMaximizing) {
-	let winner = calculateWin(board);
+	let winner = checkWin(board);
 
 	if (winner === "O") {
 		return 10 - depth;
 	} else if (winner === "X") {
 		return depth - 10;
-	} else if (calculateTie(board)) {
+	} else if (!checkMoveLeft(board)) {
 		return 0;
 	}
 
@@ -77,8 +77,8 @@ function minimax(board, depth, isMaximizing) {
 		//Try a move.
 		board[i] = isMaximizing ? "O" : "X";
 
-		let calculated = minimax(board, depth + 1, !isMaximizing);
-		bestValue = isMaximizing ? Math.max(bestValue, calculated) : Math.min(bestValue, calculated);
+		let calculatedValue = minimax(board, depth + 1, !isMaximizing);
+		bestValue = isMaximizing ? Math.max(bestValue, calculatedValue) : Math.min(bestValue, calculatedValue);
 
 		//Undo the move.
 		board[i] = null;
@@ -144,7 +144,7 @@ export function findEasyMove(board) {
 		board[i] = "O";
 
 		//Check if this move causes a win.
-		if (calculateWin(board) === "O") {
+		if (checkWin(board) === "O") {
 			bestMoves.push(i);
 		}
 

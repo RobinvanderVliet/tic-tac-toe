@@ -1,5 +1,5 @@
 import React from "react";
-import {calculateTie, calculateWin, findEasyMove, findPerfectMove} from "../helper";
+import {checkMoveLeft, checkWin, findEasyMove, findPerfectMove} from "../helper";
 import Board from "./Board";
 
 /**
@@ -30,7 +30,7 @@ class Game extends React.Component {
 		let history = this.state.history;
 		let turn = this.state.turn;
 
-		if (calculateWin(board) || board[square]) {
+		if (checkWin(board) || board[square]) {
 			//Ignore the click if there is already a winner or if this game board square is already filled.
 			return;
 		}
@@ -39,7 +39,7 @@ class Game extends React.Component {
 		history.push(square);
 
 		//Execute computer move, if there is no winner and if it is a game against the computer.
-		if (!calculateWin(board) && this.state.difficulty > 0) {
+		if (!checkWin(board) && this.state.difficulty > 0) {
 			let move;
 
 			//Choose a move based on the selected difficulty.
@@ -121,15 +121,14 @@ class Game extends React.Component {
 	 */
 	render() {
 		const board = this.state.board;
-		const winner = calculateWin(board);
-		const tie = calculateTie(board);
+		const winner = checkWin(board);
 
 		let status;
 
 		if (winner) {
 			status = winner + " won the game!";
 			this.sendStatus();
-		} else if (tie) {
+		} else if (!checkMoveLeft(board)) {
 			status = "It is a tie!";
 			this.sendStatus();
 		} else {

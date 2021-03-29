@@ -56,7 +56,7 @@ class Game extends React.Component {
 				case 4:
 					move = Math.random() < 0.2 ? findEasyMove(board) : findPerfectMove(board);
 					break;
-				case 5:
+				default:
 					move = findPerfectMove(board);
 					break;
 			}

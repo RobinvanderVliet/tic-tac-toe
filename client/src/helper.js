@@ -54,16 +54,14 @@ export function calculateTie(board) {
  * @returns {number} The recursively calculated score given to this game board.
  */
 function minimax(board, depth, isMaximizing) {
-	if (calculateTie(board)) {
-		return 0;
-	}
-
 	let winner = calculateWin(board);
 
 	if (winner === "O") {
 		return 10 - depth;
 	} else if (winner === "X") {
 		return depth - 10;
+	} else if (calculateTie(board)) {
+		return 0;
 	}
 
 	//The board is not in a terminal state: there is no winner and no tie.

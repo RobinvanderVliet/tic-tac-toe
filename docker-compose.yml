@@ -1,0 +1,40 @@
+version: '3'
+services:
+  client:
+    container_name: client
+    stdin_open: true
+    build:
+      context: ./client
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/usr/src/app/client
+      - /usr/src/app/client/node_modules
+  server:
+    container_name: server
+    build:
+      context: ./server
+    ports:
+      - "3080:3080"
+    volumes:
+       - ./server:/usr/src/app/server
+       - /usr/src/app/server/node_modules
+    networks:
+      - network
+  mongo:
+    container_name: mongo
+    image: mongo
+    restart: always
+    networks:
+      - network
+  mongo-express:
+    container_name: mongo-express
+    image: mongo-express
+    restart: always
+    ports:
+      - "8081:8081"
+    networks:
+      - network
+networks:
+  network:
+    driver: bridge

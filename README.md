@@ -26,4 +26,4 @@ For storing state variables I first tried using Hooks and the function `useState
 
 Online I explored different algorithms for solving the game. There are two main difficulties for playing against the computer in my implementation: "beginner" and "impossible". The algorithm for the difficulty "beginner" is pretty simple: it checks if it can win with a single move, and then it does that move, otherwise it just picks a random move. The algorithm for the difficulty "impossible" is much more sophisticated. For this difficulty I implemented [the minimax algorithm](https://en.wikipedia.org/wiki/Minimax), which recursively finds the best moves possible for the computer. When it finds multiple moves of an equal score, it picks one at random. The other difficulties ("easy", "medium" and "hard") are derivatives of the two main algorithms: a random algorithm is chosen.
 
-The server application is pretty straightforward. It contains one POST route that stores games in th MongoDB database.
+The server application is pretty straightforward. It contains one POST route that stores games in the MongoDB database.

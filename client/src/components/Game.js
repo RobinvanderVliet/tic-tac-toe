@@ -108,7 +108,7 @@ class Game extends React.Component {
 				"Content-Type": "application/json"
 			},
 			body: JSON.stringify({
-				//This is the only data the server would really need. The game can be replayed with just this data.
+				//This is the only data that the server really needs. The game can be replayed with just this data.
 				difficulty: this.state.difficulty,
 				history: this.state.history
 			})

@@ -1,0 +1,27 @@
+{
+  "name": "tictactoe-server",
+  "author": "Robin van der Vliet",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.bundle.js",
+    "build": "webpack",
+    "dev": "nodemon ./server.js localhost 3080"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^1.0.4",
+    "mongodb": "^3.6.5",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "del": "^5.1.0",
+    "fancy-log": "^1.3.3",
+    "gulp": "^4.0.2",
+    "gulp-zip": "^5.0.1",
+    "nodemon": "^2.0.4",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-stream": "^5.2.1"
+  }
+}
